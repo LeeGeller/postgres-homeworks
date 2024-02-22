@@ -24,14 +24,14 @@ def open_data_file(data) -> list:
     return new_list
 
 
-def add_data_to_database(data_list: list, name_table: str, column_count: int) -> None:
+def add_data_to_database(data_list: list, name_table: str) -> None:
     """
     Отправляет информацию в БД.
     :data_list: список из словарей, заполненный данными
     :name_table: название таблицы, куда отправляется инфо
     :column_count: количество столбцов в этой таблице
     """
-    count = '%s ' * column_count
+
     with psycopg2.connect(
             host='localhost',
             database='north',
@@ -40,7 +40,18 @@ def add_data_to_database(data_list: list, name_table: str, column_count: int) ->
     ) as conn:
         with conn.cursor() as cur:
             for data_info in data_list:
+                count = '%s ' * len(data_info)
                 val = tuple(data_info.values())
                 cur.execute(f"INSERT INTO {name_table} VALUES ({', '.join(count.split())})", val)
                 print(val)
     conn.close()
+
+
+data_employees = open_data_file(DATA_EMPLOYEES)
+add_data_to_database(data_employees, 'employees')
+
+data_customers = open_data_file(DATA_CUSTOMERS)
+add_data_to_database(data_customers, 'customers')
+
+data_orders = open_data_file(DATA_CUSTOMERS)
+add_data_to_database(data_orders, 'orders')
