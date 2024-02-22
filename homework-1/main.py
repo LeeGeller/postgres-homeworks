@@ -54,5 +54,5 @@ if __name__ == '__main__':
     data_customers = open_data_file(DATA_CUSTOMERS)
     add_data_to_database(data_customers, 'customers')
 
-    data_orders = open_data_file(DATA_CUSTOMERS)
+    data_orders = open_data_file(DATA_ORDERS)
     add_data_to_database(data_orders, 'orders')
