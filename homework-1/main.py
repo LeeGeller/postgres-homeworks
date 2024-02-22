@@ -47,11 +47,12 @@ def add_data_to_database(data_list: list, name_table: str) -> None:
     conn.close()
 
 
-data_employees = open_data_file(DATA_EMPLOYEES)
-add_data_to_database(data_employees, 'employees')
+if __name__ == '__main__':
+    data_employees = open_data_file(DATA_EMPLOYEES)
+    add_data_to_database(data_employees, 'employees')
 
-data_customers = open_data_file(DATA_CUSTOMERS)
-add_data_to_database(data_customers, 'customers')
+    data_customers = open_data_file(DATA_CUSTOMERS)
+    add_data_to_database(data_customers, 'customers')
 
-data_orders = open_data_file(DATA_CUSTOMERS)
-add_data_to_database(data_orders, 'orders')
+    data_orders = open_data_file(DATA_CUSTOMERS)
+    add_data_to_database(data_orders, 'orders')
