@@ -23,6 +23,10 @@ ORDER BY units_in_stock ASC
 
 
 -- 3. Список компаний заказчиков (company_name из табл customers), не сделавших ни одного заказа
+SELECT company_name FROM customers
+LEFT JOIN orders USING(customer_id)
+WHERE NOT EXISTS (SELECT customer_id FROM orders WHERE customers.customer_id = orders.customer_id)
+GROUP BY company_name
 
 
 -- 4. уникальные названия продуктов, которых заказано ровно 10 единиц (количество заказанных единиц см в колонке quantity табл order_details)
